@@ -1,4 +1,54 @@
+/* 프리텐다드 */
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
 body {
-  background-color: black;
-  color: white;
+  font-family: "Pretendard";
+  background-color: #e5e5e5;
+}
+
+.con {
+  max-width: 1440px;
+}
+
+
+/* 브랜드 스와이퍼 */
+.swiper {
+  width: 1000px;
+  background-color: white;
+}
+
+.swiper .swiper-slide {
+  height: 90px;
+  width: 1000px;
+}
+
+.swiper-wrapper {
+  width: 1000px !important;
+}
+
+.swiper-slide>ul>li.active>a {
+  color: #ff8400;
+}
+
+
+.swiper-slide>ul>li.active>div {
+  display: block;
+}
+
+
+/* 브랜드 설명 부분 */
+.sub-menu-box>div {
+  		/* display: none; */
 }
