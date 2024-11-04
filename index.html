@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>동원 fnb 브랜드 페이지</title>
+  <!-- 스타일 시트 연결 -->
   <link rel="stylesheet" href="style.css">
+  <!-- js 연결 -->
   <script defer src="script.js"></script>
   <!-- 테일윈드 불러오기 -->
   <script src="tailwind.config.js"></script>
@@ -85,7 +87,7 @@
 </head>
 
 <body>
-<!-- 브랜드 소개 타이틀  -->
+  <!-- 브랜드 소개 타이틀  -->
   <div class="brand-title-box">
     <div class="con mx-auto bg-white flex items-center flex-col">
       <span class="text-[35px] font-semibold text-[#ff8400]">브랜드 소개</span>
@@ -94,7 +96,7 @@
         행복한 생활이 펼쳐집니다.</span>
     </div>
   </div>
-<!-- 브랜드 스와이퍼 -->
+  <!-- 브랜드 스와이퍼 -->
   <div class="pt-[60px]">
     <div class="con bg-white h-[90px] mx-auto relative">
       <div class="my-swiper-button-prev absolute z-8 top-[50%] -translate-y-1/2 left-[80px]">
@@ -148,13 +150,56 @@
 
   <div class="sub-menu-box absolute top-0 mt-[235px] left-0 w-full bg-blue-200">
     <div class="sub-menu sub-menu-1 bg-red-100 con mx-auto flex flex-col items-center">
-      <div class="sub-menu-1_title-box">
-        <img class="logo-box" src="" alt="">
-        <div class="brand-box"></div>
+      <div class="sub-menu-1_title-box pt-[60px] flex-col flex items-center gap-[15px] pb-[110px]">
+        <img class="logo-box w-[220px]" src="img/동원 logo.svg" alt="동원로고">
+        <div class="brand-box flex-col flex items-center">
+          <div class="text-[20px]">건강한 식품을 간편하게,</div>
+          <span class="text-[20px]">우리의 식탁을 더 건강하게 만드는 <span class="font-semibold">동원 F&B의 대표 브랜드</span></span>
+        </div>
+      </div>
+      <div class="sub-menu-1_main-box">
+        <div class="sub-1_main_title font-[HakgyoansimAllimjangTTF-R] text-[20px] flex flex-col items-center pb-[40px]">
+          <span>
+            <span class="font-[HakgyoansimAllimjangTTF-B] text-[#ff8400]">‘동원’</span>이야기
+          </span>
+        </div>
+        <div class="sub-1_main_text flex flex-col items-center">
+          <div class="title1 text-[30px]">정직한 재료, 좋은 음식</div>
+          <div class="title2 text-[50px] mt-[-2px]">건강한 식생활의 기본</div>
+          <div class="subtitle1 flex flex-col items-center text-[#626262] gap-[1px]">
+            <p>모두가 트렌드를 이야기 할 때, 원칙을 지키며 건강한 음식을 만드는 사람들이 있습니다.</p>
+            <p>건강한 음식의 기본을 연구하고 확신이 들때까지 망설이는 사람들. 동원은 정직한 재료로 맛있고 건강한 제품을 만듭니다.</p>
+          </div>
+        </div>
+        <div class="sub-1_main_img-box pt-[80px] w-[1900px]">
+          <img class="w-full" src="img/동원_브랜드페이지_메인img.jpg" alt="동원_브랜드페이지_메인img">
+        </div>  
       </div>
       <div class="sub-menu-1_conts-box flex flex-col items-center">
-        <div class="sub-menu-1_main-box">메인소개</div>
-        <div class="sub-menu-1_history-box">연혁</div>
+        <div class="sub-menu-1_main-brand-box pt-[85px] flex flex-col items-center bg-[#FFF8ED]">
+          <div class="sub1_main-brand_logo w-[300px]">
+            <img class="w-full" src="img/동원참치_로고.png" alt="동원참치_로고">
+          </div>
+          <div class="sub1_main-brand-title1 text-[50px] pt-[30px]">
+            1982년 11월 12일 참치의 새로운 역사가 시작되다
+          </div>
+          <div class="sub1_main-brand-text flex flex-col items-center text-[#626262] gap-[1px] pt-[10px]">
+            <p>식탁에서 흔히 볼 수 있는 참치 통조림은 1982년 11월 12일 최초로 국내에 출시되었습니다</p>
+            <p>당시 미국에서는 참치 통조림이 흔한 실정이었지만 우리나라의 경우 알려지지 않은 형편이었으며,</p>
+            <p>대한민국의 GNP가 2,000달러에 육박한다는 배경과 함게 참치 통조림 시작 가능성을 확신하게 되었습니다.</p>
+            <p>그렇게 동원산업이 국내에서 처음으로 참치 통조림을 출시하게 되었으며,</p>
+            <p>시장에 나온 동원참치는 한국인의 식성에 맞게 찌개나 반찬으로 사용되기 시작했습니다. </p>
+          </div>
+          <div class="sub1_main-brand-img1 w-[1900px] pt-[100px]">
+            <img class="w-full" src="img/동원 연혁 img.png" alt="동원연혁">
+          </div>
+          <div class="sub1_main-brand-title2 text-[50px] pt-[160px]">
+            더 편리하게, 더 건강하게
+          </div>
+          <div class="sub1_main-brand-img2">
+            img
+          </div>
+        </div>
         <div class="sub-menu-1_design-box">디자인 연혁</div>
         <div class="sub-menu-1_bi-box">회사 bi</div>
         <div class="media-box">회사 미디어</div>
