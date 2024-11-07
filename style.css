@@ -1,42 +1,46 @@
 /* 프리텐다드 */
 @font-face {
   font-family: "Pretendard";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Semibold.woff") format("woff");
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Semibold.woff")
+    format("woff");
   font-weight: 600;
   font-style: normal;
 }
 
 /* 학교 안심 알림장 */
 @font-face {
-  font-family: 'HakgyoansimAllimjangTTF-B';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimAllimjangTTF-B.woff2') format('woff2');
+  font-family: "HakgyoansimAllimjangTTF-B";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimAllimjangTTF-B.woff2")
+    format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'HakgyoansimAllimjangTTF-R';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimAllimjangTTF-R.woff2') format('woff2');
+  font-family: "HakgyoansimAllimjangTTF-R";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimAllimjangTTF-R.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 body {
-  font-family: "Pretendard", 'HakgyoansimAllimjangTTF-B', 'HakgyoansimAllimjangTTF-R', sans-serif;
-  background-color: #e5e5e5;
+  font-family: "Pretendard", "HakgyoansimAllimjangTTF-B",
+    "HakgyoansimAllimjangTTF-R", sans-serif;
+  /* background-color: #e5e5e5; */
 }
 
 .con {
   max-width: 1440px;
 }
-
 
 /* 브랜드 스와이퍼 */
 .swiper {
@@ -53,15 +57,17 @@ body {
   width: 1000px !important;
 }
 
-.swiper-slide>ul>li.active>a {
+.swiper-slide > ul {
+  gap: clamp(3rem, 10vw, 20rem);
+}
+
+.swiper-slide > ul > li.active > a {
   color: #ff8400;
 }
 
-
-.swiper-slide>ul>li.active>div {
+.swiper-slide > ul > li.active > div {
   display: block;
 }
-
 
 /* 브랜드 설명 부분 */
 /* .sub-menu-box >div {

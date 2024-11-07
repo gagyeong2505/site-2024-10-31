@@ -1,219 +1,384 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>동원 fnb 브랜드 페이지</title>
+    <!-- 스타일 시트 연결 -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- js 연결 -->
+    <script defer src="script.js"></script>
+    <!-- 테일윈드 불러오기 -->
+    <script src="tailwind.config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        plugins: [
+          function ({ addVariant }) {
+            const groupVariantPrefixes = ["p1", "p2", "p3"];
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>동원 fnb 브랜드 페이지</title>
-  <!-- 스타일 시트 연결 -->
-  <link rel="stylesheet" href="style.css">
-  <!-- js 연결 -->
-  <script defer src="script.js"></script>
-  <!-- 테일윈드 불러오기 -->
-  <script src="tailwind.config.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      plugins: [
-        function ({
-          addVariant
-        }) {
-          const groupVariantPrefixes = ['p1', 'p2', 'p3'];
-
-          function escapeClassName(className) {
-            return className
-              .replace(/\[/g, '\\[') // '['를 이스케이프
-              .replace(/\]/g, '\\]') // ']'를 이스케이프
-              .replace(/\#/g, '\\#') // '#'를 이스케이프
-              .replace(/\//g, '\\/'); // '/'를 이스케이프 (필요한 경우)
-          }
-          // group-on 변형 추가 함수
-          const addGroupOnVariant = (name = '') => {
-            const selector = name ? `group\\/${name}` : 'group';
-            const variantName = name ? `group-on/${name}` : 'group-on';
-            addVariant(variantName, ({
-              modifySelectors
-            }) => {
-              modifySelectors(({
-                className
-              }) => {
-                return `.${selector}.on .${escapeClassName(variantName)}\\:${escapeClassName(className)}`;
+            function escapeClassName(className) {
+              return className
+                .replace(/\[/g, "\\[") // '['를 이스케이프
+                .replace(/\]/g, "\\]") // ']'를 이스케이프
+                .replace(/\#/g, "\\#") // '#'를 이스케이프
+                .replace(/\//g, "\\/"); // '/'를 이스케이프 (필요한 경우)
+            }
+            // group-on 변형 추가 함수
+            const addGroupOnVariant = (name = "") => {
+              const selector = name ? `group\\/${name}` : "group";
+              const variantName = name ? `group-on/${name}` : "group-on";
+              addVariant(variantName, ({ modifySelectors }) => {
+                modifySelectors(({ className }) => {
+                  return `.${selector}.on .${escapeClassName(
+                    variantName
+                  )}\\:${escapeClassName(className)}`;
+                });
+              });
+            };
+            // peer-on 변형 추가 함수
+            const addPeerOnVariant = (name = "") => {
+              const selector = name ? `peer\\/${name}` : "peer";
+              const variantName = name ? `peer-on/${name}` : "peer-on";
+              addVariant(variantName, ({ modifySelectors }) => {
+                modifySelectors(({ className }) => {
+                  return `.${selector}.on ~ .${escapeClassName(
+                    variantName
+                  )}\\:${escapeClassName(className)}`;
+                });
+              });
+            };
+            // 기본 group-on, peer-on 변형 추가
+            addGroupOnVariant();
+            addPeerOnVariant();
+            // 특정 그룹과 피어에 대한 변형 추가
+            groupVariantPrefixes.forEach((name) => {
+              addGroupOnVariant(name);
+              addPeerOnVariant(name);
+            });
+            // on 클래스에 대한 변형 추가
+            addVariant("on", ({ modifySelectors }) => {
+              modifySelectors(({ className }) => {
+                return `.on.on\\:${escapeClassName(className)}`;
               });
             });
-          };
-          // peer-on 변형 추가 함수
-          const addPeerOnVariant = (name = '') => {
-            const selector = name ? `peer\\/${name}` : 'peer';
-            const variantName = name ? `peer-on/${name}` : 'peer-on';
-            addVariant(variantName, ({
-              modifySelectors
-            }) => {
-              modifySelectors(({
-                className
-              }) => {
-                return `.${selector}.on ~ .${escapeClassName(variantName)}\\:${escapeClassName(className)}`;
-              });
-            });
-          };
-          // 기본 group-on, peer-on 변형 추가
-          addGroupOnVariant();
-          addPeerOnVariant();
-          // 특정 그룹과 피어에 대한 변형 추가
-          groupVariantPrefixes.forEach(name => {
-            addGroupOnVariant(name);
-            addPeerOnVariant(name);
-          });
-          // on 클래스에 대한 변형 추가
-          addVariant('on', ({
-            modifySelectors
-          }) => {
-            modifySelectors(({
-              className
-            }) => {
-              return `.on.on\\:${escapeClassName(className)}`;
-            });
-          });
-        },
-      ],
-    }
-  </script>
-  <!-- 폰트어썸 불러오기 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <!-- 제이쿼리 불러오기 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <!-- 스와이퍼 연결 -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-</head>
+          },
+        ],
+      };
+    </script>
+    <!-- 폰트어썸 불러오기 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!-- 스와이퍼 연결 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </head>
 
-<body>
-  <!-- 브랜드 소개 타이틀  -->
-  <div class="brand-title-box">
-    <div class="con mx-auto bg-white flex items-center flex-col">
-      <span class="text-[35px] font-semibold text-[#ff8400]">브랜드 소개</span>
-      <span class="text-[20px] font-light text-[#5D5A5A] after:content-[''] after:w-[550px] after:h-[4px] after:bg-[#FFE3C9] after:absolute
-    relative after:top-[110%] after:left-[50%] after:-translate-x-1/2 after:radius-[15px]">동원 F&B의 다채로운 브랜드와 함께 매일 건강하고
-        행복한 생활이 펼쳐집니다.</span>
-    </div>
-  </div>
-  <!-- 브랜드 스와이퍼 -->
-  <div class="pt-[60px]">
-    <div class="con bg-white h-[90px] mx-auto relative">
-      <div class="my-swiper-button-prev absolute z-8 top-[50%] -translate-y-1/2 left-[80px]">
-        <i class="fa-solid fa-angle-left text-[24px] text-[#D9D9D9]"></i>
-      </div>
-      <div class="my-swiper-button-next absolute z-8 top-[50%] -translate-y-1/2 right-[80px]">
-        <i class="fa-solid fa-angle-right text-[24px] text-[#D9D9D9]"></i>
-      </div>
-      <!-- Slider main container -->
-      <div class="swiper">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper ">
-          <!-- Slides -->
-          <div class="swiper-slide">
-            <ul class="flex h-full items-center justify-between relative">
-              <li class="text">
-                <a class="block h-full text-[20px] px-[10px]" href="#"
-                  onclick="$('.sub-menu-box > .sub-menu').hide(); $('.sub-menu-box > .sub-menu-1').show();">동원</a>
-              </li>
-              <li class="text">
-                <a class="block h-full text-[20px] px-[10px]" href="#"
-                  onclick="$('.sub-menu-box > .sub-menu').hide(); $('.sub-menu-box > .sub-menu-2').show();">양반</a>
-              </li>
-              <li class="text"><a class="block h-full text-[20px] px-[10px]" href="#">리챔</a></li>
-              <li class="text"><a class="block h-full text-[20px] px-[10px]" href="#">개성</a></li>
-            </ul>
-
-          </div>
-          <div class="swiper-slide ">
-            <ul class="flex h-full items-center justify-between">
-              <li class="text"><a class="block h-full text-[20px]" href="#">쎈쿡</a></li>
-              <li class="text"><a class="block h-full text-[20px]" href="#">떡신</a></li>
-              <li class="text"><a class="block h-full text-[20px]" href="#">덴마크</a></li>
-              <li class="text"><a class="block h-full text-[20px]" href="#">소와나무</a></li>
-            </ul>
-          </div>
-          <div class="swiper-slide ">
-            <ul class="flex h-full items-center justify-between">
-              <li class="text"><a class="block h-full text-[20px]" href="#">동원샘물</a></li>
-              <li class="text"><a class="block h-full text-[20px]" href="#">뉴트리플랜</a></li>
-              <li class="text"><a class="block h-full text-[20px]" href="#">GNC</a></li>
-              <li class="text"><a class="block h-full text-[20px]" href="#">천지인</a></li>
-            </ul>
-          </div>
-
-        </div>
-
+  <body>
+    <!-- 브랜드 소개 타이틀  -->
+    <div class="brand-title-box">
+      <div class="con mx-auto bg-white flex items-center flex-col">
+        <span class="text-[35px] font-semibold text-[#ff8400]"
+          >브랜드 소개</span
+        >
+        <span
+          class="text-[20px] font-light text-[#5D5A5A] after:content-[''] after:w-[550px] after:h-[4px] after:bg-[#FFE3C9] after:absolute relative after:top-[110%] after:left-[50%] after:-translate-x-1/2 after:radius-[15px]"
+          >동원 F&B의 다채로운 브랜드와 함께 매일 건강하고 행복한 생활이
+          펼쳐집니다.</span
+        >
       </div>
     </div>
-  </div>
-
-  <div class="sub-menu-box absolute top-0 mt-[235px] left-0 w-full bg-blue-200">
-    <div class="sub-menu sub-menu-1 bg-red-100 con mx-auto flex flex-col items-center">
-      <div class="sub-menu-1_title-box pt-[60px] flex-col flex items-center gap-[15px] pb-[110px]">
-        <img class="logo-box w-[220px]" src="img/동원 logo.svg" alt="동원로고">
-        <div class="brand-box flex-col flex items-center">
-          <div class="text-[20px]">건강한 식품을 간편하게,</div>
-          <span class="text-[20px]">우리의 식탁을 더 건강하게 만드는 <span class="font-semibold">동원 F&B의 대표 브랜드</span></span>
-        </div>
-      </div>
-      <div class="sub-menu-1_main-box">
-        <div class="sub-1_main_title font-[HakgyoansimAllimjangTTF-R] text-[20px] flex flex-col items-center pb-[40px]">
-          <span>
-            <span class="font-[HakgyoansimAllimjangTTF-B] text-[#ff8400]">‘동원’</span>이야기
-          </span>
-        </div>
-        <div class="sub-1_main_text flex flex-col items-center">
-          <div class="title1 text-[30px]">정직한 재료, 좋은 음식</div>
-          <div class="title2 text-[50px] mt-[-2px]">건강한 식생활의 기본</div>
-          <div class="subtitle1 flex flex-col items-center text-[#626262] gap-[1px]">
-            <p>모두가 트렌드를 이야기 할 때, 원칙을 지키며 건강한 음식을 만드는 사람들이 있습니다.</p>
-            <p>건강한 음식의 기본을 연구하고 확신이 들때까지 망설이는 사람들. 동원은 정직한 재료로 맛있고 건강한 제품을 만듭니다.</p>
+    <!-- 브랜드 스와이퍼 -->
+    <div class="pt-[60px]">
+      <div class="w-full bg-white h-[90px] relative">
+        <div
+          class="absolute z-10 top-[54%] left-[50%] -translate-x-1/2 -translate-y-1/2 flex w-full max-w-[1440px] px-[5%]"
+        >
+          <div class="my-swiper-button-prev">
+            <i class="fa-solid fa-angle-left text-[24px] text-[#D9D9D9]"></i>
+          </div>
+          <div class="flex-grow"></div>
+          <div class="my-swiper-button-next">
+            <i class="fa-solid fa-angle-right text-[24px] text-[#D9D9D9]"></i>
           </div>
         </div>
-        <div class="sub-1_main_img-box pt-[80px] w-[1900px]">
-          <img class="w-full" src="img/동원_브랜드페이지_메인img.jpg" alt="동원_브랜드페이지_메인img">
+        <!-- Slider main container -->
+        <div class="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <ul class="flex h-full items-center justify-center relative">
+                <li class="text">
+                  <a
+                    class="block h-full text-[20px] px-[10px]"
+                    href="#"
+                    onclick="$('.sub-menu-box > .sub-menu').hide(); $('.sub-menu-box > .sub-menu-1').show();"
+                    >동원</a
+                  >
+                </li>
+                <li class="text">
+                  <a
+                    class="block h-full text-[20px] px-[10px]"
+                    href="#"
+                    onclick="$('.sub-menu-box > .sub-menu').hide(); $('.sub-menu-box > .sub-menu-2').show();"
+                    >양반</a
+                  >
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px] px-[10px]" href="#"
+                    >리챔</a
+                  >
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px] px-[10px]" href="#"
+                    >개성</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="swiper-slide">
+              <ul class="flex h-full items-center justify-between">
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">쎈쿡</a>
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">떡신</a>
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">덴마크</a>
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">소와나무</a>
+                </li>
+              </ul>
+            </div>
+            <div class="swiper-slide">
+              <ul class="flex h-full items-center justify-between">
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">동원샘물</a>
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">뉴트리플랜</a>
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">GNC</a>
+                </li>
+                <li class="text">
+                  <a class="block h-full text-[20px]" href="#">천지인</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="sub-menu-1_conts-box flex flex-col items-center">
-        <div class="sub-menu-1_main-brand-box pt-[85px] flex flex-col items-center bg-[#FFF8ED] pb-[60px]">
-          <div class="sub1_main-brand_logo w-[300px]">
-            <img class="w-full" src="img/동원참치_로고.png" alt="동원참치_로고">
-          </div>
-          <div class="sub1_main-brand-title1 text-[50px] pt-[30px]">
-            1982년 11월 12일 참치의 새로운 역사가 시작되다
-          </div>
-          <div class="sub1_main-brand-text1 flex flex-col items-center text-[#626262] gap-[1px] pt-[10px]">
-            <p>식탁에서 흔히 볼 수 있는 참치 통조림은 1982년 11월 12일 최초로 국내에 출시되었습니다</p>
-            <p>당시 미국에서는 참치 통조림이 흔한 실정이었지만 우리나라의 경우 알려지지 않은 형편이었으며,</p>
-            <p>대한민국의 GNP가 2,000달러에 육박한다는 배경과 함게 참치 통조림 시작 가능성을 확신하게 되었습니다.</p>
-            <p>그렇게 동원산업이 국내에서 처음으로 참치 통조림을 출시하게 되었으며,</p>
-            <p>시장에 나온 동원참치는 한국인의 식성에 맞게 찌개나 반찬으로 사용되기 시작했습니다. </p>
-          </div>
-          <div class="sub1_main-brand-img1 w-[1900px] pt-[100px]">
-            <img class="w-full" src="img/동원 연혁 img.png" alt="동원연혁">
-          </div>
-          <div class="sub1_main-brand-title2 text-[50px] pt-[160px]">
-            더 편리하게, 더 건강하게
-          </div>
-          <div class="sub1_main-brand-text2 flex flex-col items-center text-[#626262] gap-[1px] pt-[30px]">
-            <P>편의식품이라는 이미지와 통조림 식품이라는 선입견으로 인해 ‘참치캔은 건강식품이 아니다’라는 인식이 강했습니다.</P>
-            <P>동원 F&B는 ‘바다에서 온 건강’ 이라는 콘셉트를 앞세워 고단백 식품은 참치의 건강성을 부각시키는 마케팅에 집중하기 시작했습니다.</P>
-            <P>동원 참치에 포함되어 있는 여러 유익한 성분들을 강조하며 동원참치 통조림은 고단백 건강 식품으로 자리잡게 되었습니다.</P>
-          </div>
-          <div class="sub1_main-brand-img2 w-[1000] h-[880px] rounded-lg overflow-hidden mt-[60px] flex items-center">
-            <img class="w-full" src="img/동원참치 img.png" alt="동원참치">
-          </div>
-        </div>
-        <div class="sub-menu-1_design-box">
-          sub-menu-1_design
-        </div>
-        <div class="sub-menu-1_bi-box">회사 bi</div>
-        <div class="media-box">회사 미디어</div>
       </div>
     </div>
-    <!-- <div class="sub-menu sub-menu-2 bg-yellow-200">2</div> -->
-  </div>
-</body>
-
+    <!-- pc 서브메뉴1 (동원) -->
+    <div class="sub-menu-box absolute top-0 mt-[235px] left-0 w-full">
+      <div class="sub-menu sub-menu-1 flex flex-col items-center">
+        <!-- 서브메뉴_동원 메인(로고있는 페이지) -->
+        <div
+          class="sub-menu-1_title-box pt-[60px] flex-col flex items-center gap-[15px] pb-[110px]"
+        >
+          <img
+            class="logo-box w-[220px]"
+            src="img/동원 logo.svg"
+            alt="동원로고"
+          />
+          <div class="brand-box flex-col flex items-center">
+            <div class="text-[20px] text-center">건강한 식품을 간편하게,</div>
+            <span class="text-[20px] text-center"
+              >우리의 식탁을 더 건강하게 만드는
+              <span class="font-semibold">동원 F&B의 대표 브랜드</span></span
+            >
+          </div>
+        </div>
+        <!-- 서브메뉴_동원 메인(브랜드 설명 페이지) -->
+        <div class="sub-menu-1_main-box w-full">
+          <div
+            class="sub-1_main_title font-[HakgyoansimAllimjangTTF-R] text-[20px] flex flex-col items-center pb-[40px]"
+          >
+            <span>
+              <span class="font-[HakgyoansimAllimjangTTF-B] text-[#ff8400]"
+                >‘동원’</span
+              >이야기
+            </span>
+          </div>
+          <div class="sub-1_main_text flex flex-col items-center con mx-auto">
+            <div class="title1 text-[30px]">정직한 재료, 좋은 음식</div>
+            <div class="title2 text-[50px] mt-[-2px]">건강한 식생활의 기본</div>
+            <div
+              class="subtitle1 flex flex-col items-center text-[#626262] gap-[1px]"
+            >
+              <p>
+                모두가 트렌드를 이야기 할 때, 원칙을 지키며 건강한 음식을 만드는
+                사람들이 있습니다.
+              </p>
+              <p>
+                건강한 음식의 기본을 연구하고 확신이 들때까지 망설이는 사람들.
+                동원은 정직한 재료로 맛있고 건강한 제품을 만듭니다.
+              </p>
+            </div>
+          </div>
+          <div class="sub-1_main_img-box pt-[80px] w-[1920px] mx-auto">
+            <img
+              class=""
+              src="img/동원_브랜드페이지_메인img.jpg"
+              alt="동원_브랜드페이지_메인img"
+            />
+          </div>
+        </div>
+        <!-- 서브메뉴_동원 컨텐츠(동원참치 시작) -->
+        <div class="sub-menu-1_conts-box flex flex-col items-center w-full">
+          <!-- 서브메뉴_동원참치- 메인설명 -->
+          <div
+            class="sub-menu-1_main-brand-box pt-[85px] flex flex-col items-center pb-[60px] bg-[#FFF8ED]"
+          >
+            <div class="sub1_main-brand_logo w-[300px] con mx-auto">
+              <img
+                class="w-full"
+                src="img/동원참치_로고.png"
+                alt="동원참치_로고"
+              />
+            </div>
+            <div class="sub1_main-brand-title1 text-[50px] pt-[30px]">
+              1982년 11월 12일 참치의 새로운 역사가 시작되다
+            </div>
+            <div
+              class="sub1_main-brand-text1 flex flex-col items-center text-[#626262] gap-[1px] pt-[10px]"
+            >
+              <p>
+                식탁에서 흔히 볼 수 있는 참치 통조림은 1982년 11월 12일 최초로
+                국내에 출시되었습니다
+              </p>
+              <p>
+                당시 미국에서는 참치 통조림이 흔한 실정이었지만 우리나라의 경우
+                알려지지 않은 형편이었으며,
+              </p>
+              <p>
+                대한민국의 GNP가 2,000달러에 육박한다는 배경과 함게 참치 통조림
+                시작 가능성을 확신하게 되었습니다.
+              </p>
+              <p>
+                그렇게 동원산업이 국내에서 처음으로 참치 통조림을 출시하게
+                되었으며,
+              </p>
+              <p>
+                시장에 나온 동원참치는 한국인의 식성에 맞게 찌개나 반찬으로
+                사용되기 시작했습니다.
+              </p>
+            </div>
+            <div class="sub1_main-brand-img1 w-[1900px] pt-[100px]">
+              <img class="w-full" src="img/동원 연혁 img.png" alt="동원연혁" />
+            </div>
+            <div class="sub1_main-brand-title2 text-[50px] pt-[160px]">
+              더 편리하게, 더 건강하게
+            </div>
+            <div
+              class="sub1_main-brand-text2 flex flex-col items-center text-[#626262] gap-[1px] pt-[30px]"
+            >
+              <p>
+                편의식품이라는 이미지와 통조림 식품이라는 선입견으로 인해
+                ‘참치캔은 건강식품이 아니다’라는 인식이 강했습니다.
+              </p>
+              <p>
+                동원 F&B는 ‘바다에서 온 건강’ 이라는 콘셉트를 앞세워 고단백
+                식품은 참치의 건강성을 부각시키는 마케팅에 집중하기
+                시작했습니다.
+              </p>
+              <p>
+                동원 참치에 포함되어 있는 여러 유익한 성분들을 강조하며 동원참치
+                통조림은 고단백 건강 식품으로 자리잡게 되었습니다.
+              </p>
+            </div>
+            <div
+              class="sub1_main-brand-img2 w-[1000] h-[880px] rounded-lg overflow-hidden mt-[60px] flex items-center"
+            >
+              <img class="w-full" src="img/동원참치 img.png" alt="동원참치" />
+            </div>
+          </div>
+        </div>
+        <!-- 서브메뉴_동원참치- 디자인연혁 -->
+        <div class="sub-menu-1_design-box relative">
+          <div class="sub-menu-1_design-bgi bg-white w-full h-[1440px]">
+            <img
+              class="h-full w-full"
+              src="img/동원 디자인연혁.svg"
+              alt="동원 디자인 연혁 bg"
+            />
+          </div>
+          <div class="sub-menu-1_design-text absolute left-[15%] top-[5%]">
+            <div
+              class="sub-menu-1_design-title text-[50px] font-[HakgyoansimAllimjangTTF-R]"
+            >
+              동원 참치의 역사
+            </div>
+            <div
+              class="sub-menu-1_design-subt pt-[15px] text-[18px] text-[#626262]"
+            >
+              <p>
+                1982년 국내에 출시되어 지금까지 함께 해온 ‘동원참치’는 참치
+                이미지를 활용한 디자인을 사용하였고,
+              </p>
+              <p>
+                현재와 같은 노란색 바탕에 동원의 BI를 형상화한 패턴이 그려진
+                형태로 교체되었습니다.
+              </p>
+              <p>
+                동원이라는 브랜드의 특성을 유지하기 위한 디자인을
+                보존하였습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sub-menu-1_bi-box flex flex-col items-center pt-[80px]">
+          <div class="sub-menu-1_bi-title text-[50px] font-[HakgyoansimAllimjangTTF-R]">동원의 BI</div>
+          <div class="sub-menu-1_bi-img1 w-[280px] my-[80px]">
+            <img class="w-full" src="img/동원 logo.svg" alt="동원의 BI">
+          </div>
+          <div class="sub-menu-1_bi-text text-[28px] text-[#626262] flex flex-col items-center">
+            <p>
+              내 가족에게 더 나은 맛, 더 신선하고 건강한 식품을 제공하기 위해
+            </p>
+            <p>
+              엄선된 재료로 마음과 정성을 다해 만들고자 하는 의미를 담았습니다.
+            </p>
+          </div>
+          <div class="sub-menu-1_bi-img2 w-[850px] pt-[30px]">
+            <img class="w-full" src="img/동원 bi 디자인.png" alt="동원 bi 디자인">
+          </div>
+        </div>
+        <div class="sub-menu-1_media-box flex flex-col items-center pt-[80px]">
+          <div class="sub-menu-1_media-title flex flex-col items-center">
+            <p class="text-[50px] font-[HakgyoansimAllimjangTTF-R]">동원의 미디어</p>
+            <p class="text-[18px] text-[#626262]">동원의 마케팅을 위한 광고 홍보 영상입니다.</p>
+          </div>
+          <div class="sub-menu-1_media-img-box">
+            <a href="#" class="sub1_media1">
+              <div class="sub1_media1-img bg-[#fff] drop-shadow-md w-[400px] rounded-[100px]">
+                <img class="w-full" src="img/동원 미디어 1.png" alt="동원 미디어 1">
+              </div>
+              <div class="sub1_media1-text pt-[20px]">
+                <div class="sub1_media1-t-title flex gap-[10px] w-[400px] justify-start">
+                  <div class="sub1_media1-title_year-box bg-[#ff8400] text-white px-[20px] py-[5px] rounded-[50px] text-[18px]">1980’s</div>
+                  <span class="text-[25px] text-[#626262]">추억의 광고</span><span class="text-[#626262] text-[25px]">-</span><span class="text-[#626262] text-[25px]">동원참치</span>
+                </div>
+                <div class="sub1_media1-t-text"></div>
+              </div>
+            </a>
+            <div class="sub1_media2"></div>
+            <div class="sub1_media3"></div>            
+          </div>
+        </div>
+      </div>
+      <!-- <div class="sub-menu sub-menu-2 bg-yellow-200">2</div> -->
+    </div>
+  </body>
 </html>
